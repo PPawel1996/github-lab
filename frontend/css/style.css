@@ -1,1 +1,8 @@
-
+body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+.container { max-width: 700px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+form { display: flex; gap: 10px; align-items: center; }
+input { flex: 1; padding: 10px; }
+button { padding: 10px 14px; cursor: pointer; }
+#items { margin-top: 20px; }
+#items li { padding: 10px; border: 1px solid #ddd; border-radius: 8px; margin-top: 10px; }
+#message { color: #b00020; }
