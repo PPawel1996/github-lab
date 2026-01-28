@@ -26,4 +26,14 @@ http://localhost:8000/backend/api/items.php
 - Pull Request + review przed merge
 3.	Commit na main.
 ________________________________________
+## Testy ręczne (checklista)
+1. GET: strona ładuje listę bez błędów.
+2. POST: dodanie elementu (min 3 znaki) → pojawia się na liście.
+3. POST invalid: tytuł < 3 → komunikat błędu.
+4. PUT title: edycja tytułu → zapis i odświeżenie listy.
+5. PUT done: checkbox zmienia status → filtr działa.
+6. DELETE: usunięcie elementu → znika z listy.
+7. Search: wpisanie frazy filtruje listę.
+8. Filtry: aktywne/zrobione/wszystkie działają.
+
 **
