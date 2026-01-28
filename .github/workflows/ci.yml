@@ -1,0 +1,48 @@
+﻿name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  php_lint_and_smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+      - name: PHP lint
+        run: |
+          php -v
+          php -l backend/api/items.php
+
+      - name: Start PHP server
+        run: |
+          php -S 127.0.0.1:8000 -t . >/tmp/php-server.log 2>&1 &
+          sleep 1
+
+      - name: Smoke test GET
+        run: |
+          curl -sSf http://127.0.0.1:8000/backend/api/items.php | jq .
+
+      - name: Smoke test POST
+        run: |
+          curl -sSf -X POST http://127.0.0.1:8000/backend/api/items.php \
+            -H "Content-Type: application/json" \
+            -d '{"title":"CI test item"}' | jq .
+
+      - name: Smoke test PUT
+        run: |
+          curl -sSf -X PUT "http://127.0.0.1:8000/backend/api/items.php?id=1" \
+            -H "Content-Type: application/json" \
+            -d '{"done":true}' | jq .
+
+      - name: Smoke test DELETE
+        run: |
+          curl -sSf -X DELETE "http://127.0.0.1:8000/backend/api/items.php?id=1" | jq .
